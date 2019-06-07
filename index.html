@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Boston Hash House Harriers</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -11,6 +11,48 @@
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
+
+    <header>
+      <div class="auth">
+      <h1>Boston Hash House Harriers Events</h1>
+
+      <h2 id="message"></h2>
+
+      <form id="sign-up">
+        <p>Sign Up</p>
+        <input type="email" name="credentials[email]" placeholder="Email" />
+        <input type="password" name="credentials[password]" placeholder="Password" />
+        <input type="password" name="credentials[password_confirmation]" placeholder="Password confirmation" />
+        <input type="submit" value="Sign Up" />
+      </form>
+
+      <form id="sign-in">
+        <p>Sign In</p>
+        <input type="email" name="credentials[email]" placeholder="Email" />
+        <input type="password" name="credentials[password]" placeholder="Password" />
+        <input type="submit" value="Sign In" />
+      </form>
+
+
+      <form id="sign-out">
+        <p>Sign Out</p>
+        <input type="submit" value="Sign Out" />
+      </form>
+
+      <form id="change-pw">
+        <p>Change Password</p>
+        <input type="password" name="passwords[old]" placeholder="Old Password" />
+        <input type="password" name="passwords[new]" placeholder="New Password" />
+        <input type="submit" value="Change Password" />
+      </form>
+
+    </div>
+
+
+
+    </header>
+
+
     <body>
       <h1>Browser Template</h1>
     </body>
