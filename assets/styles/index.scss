@@ -1,1 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
+
+#add-event {
+  display: none;
+}
+
+#add-event input {
+  display: block;
+}

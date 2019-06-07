@@ -26,6 +26,7 @@ const onSignInSuccess = (responseData) => {
   $('#sign-in').hide()
   $('#change-pw').show()
   $('#sign-out').show()
+  $('#add-event').show()
 }
 
 const onSignInFailure = () => {
