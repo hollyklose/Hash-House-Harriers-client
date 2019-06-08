@@ -2,6 +2,7 @@
 
 const store = require('../store')
 const showEventsTemplate = require('../templates/event-listing.handlebars')
+const newEventTemplate = require('../templates/new-event.handlebars')
 
 const onGetEventsFailure = () => {
   $('#body-message').text('There was a problem retrieving your data. Please try again!')
@@ -9,24 +10,42 @@ const onGetEventsFailure = () => {
 }
 
 const onAddEventFailure = () => {
-  $('#body-message').text('There was a problem adding your event. Please try again!')
+  $('#add-message').text('There was a problem adding your event. Please try again!')
+  setTimeout(() => $('#add-message').text(''), 5000)
+}
+
+const onDeleteEventFailure = () => {
+  $('#body-message').text('There was a problem deleting your event. Please try again!')
   setTimeout(() => $('#body-message').text(''), 5000)
 }
 
 const onGetEventsSuccess = (responseData) => {
-  const showEventsHtml = showEventsTemplate({ events: responseData.events })
-  $('.content').html(showEventsHtml)
+  if (responseData.events.length !== 0) {
+    const showEventsHtml = showEventsTemplate({ events: responseData.events })
+    $('.content').html(showEventsHtml)
+  } else {
+    $('#body-message').text("There are currently no events. Why don't you add one?")
+    setTimeout(() => $('#body-message').text(''), 5000)
+  }
 }
 
 const onAddEventSuccess = (responseData) => {
-  $('#body-message').text('Event added successfully')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  $('#add-message').text('Event added successfully')
+  setTimeout(() => $('#add-message').text(''), 5000)
   $('form').trigger('reset')
+  const newEventHtml = newEventTemplate({ event: responseData.event })
+  $('.content').append(newEventHtml)
+}
+
+const onDeleteEventSuccess = (id) => {
+  $(`section[data-id*=${id}]`).html('')
 }
 
 module.exports = {
   onGetEventsFailure,
   onGetEventsSuccess,
   onAddEventFailure,
-  onAddEventSuccess
+  onAddEventSuccess,
+  onDeleteEventFailure,
+  onDeleteEventSuccess
 }

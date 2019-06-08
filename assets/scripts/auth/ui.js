@@ -27,6 +27,7 @@ const onSignInSuccess = (responseData) => {
   $('#change-pw').show()
   $('#sign-out').show()
   $('#add-event').show()
+  $('#content').show()
 }
 
 const onSignInFailure = () => {
@@ -43,6 +44,8 @@ const onSignOutSuccess = () => {
   $('#sign-in').show()
   $('#change-pw').hide()
   $('#sign-out').hide()
+  $('#add-event').hide()
+  $('#content').hide()
 }
 
 const onSignOutFailure = () => {

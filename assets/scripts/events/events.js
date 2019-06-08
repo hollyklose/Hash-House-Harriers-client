@@ -27,7 +27,15 @@ const onAddEvent = () => {
     .catch(ui.onAddEventFailure)
 }
 
+const onDeleteEvent = () => {
+  const id = $(event.target).data('id')
+  api.deleteEvent(id)
+    .then(responseData => { ui.onDeleteEventSuccess(id) })
+    .catch(ui.onDeleteEventFailure)
+}
+
 module.exports = {
   onGetEvents,
-  onAddEvent
+  onAddEvent,
+  onDeleteEvent
 }

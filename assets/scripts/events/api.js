@@ -21,7 +21,18 @@ const addEvent = (formData) => {
   })
 }
 
+const deleteEvent = (id) => {
+  return $.ajax({
+    url: config.apiUrl + '/events/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   getEvents,
-  addEvent
+  addEvent,
+  deleteEvent
 }
