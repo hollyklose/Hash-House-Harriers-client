@@ -34,8 +34,16 @@ const onDeleteEvent = () => {
     .catch(ui.onDeleteEventFailure)
 }
 
+// const onUpdateEvent = () => {
+//   const id = $(event.target).data('id')
+//   api.updateEvent(id)
+//     .then(() => console.log('success'))
+//     .catch(ui.onUpdateEventFailure)
+// }
+
 module.exports = {
   onGetEvents,
   onAddEvent,
-  onDeleteEvent
+  onDeleteEvent,
+  // onUpdateEvent
 }

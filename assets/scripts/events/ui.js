@@ -3,6 +3,7 @@
 const store = require('../store')
 const showEventsTemplate = require('../templates/event-listing.handlebars')
 const newEventTemplate = require('../templates/new-event.handlebars')
+const updateEventTemplate = require('../templates/update-event.handlebars')
 
 const onGetEventsFailure = () => {
   $('#body-message').text('There was a problem retrieving your data. Please try again!')
@@ -23,6 +24,7 @@ const onGetEventsSuccess = (responseData) => {
   if (responseData.events.length !== 0) {
     const showEventsHtml = showEventsTemplate({ events: responseData.events })
     $('.content').html(showEventsHtml)
+    store.eventsArray = responseData.events
   } else {
     $('#body-message').text("There are currently no events. Why don't you add one?")
     setTimeout(() => $('#body-message').text(''), 5000)
@@ -41,11 +43,22 @@ const onDeleteEventSuccess = (id) => {
   $(`section[data-id*=${id}]`).html('')
 }
 
+const onClickUpdateBtn = () => {
+  const id = $(event.target).data('id')
+  // Get event object based on id (actually a key value pair where the event object is the value)
+  let currentEvent = store.eventsArray.filter(function (item) { return item.id === id })
+  // Get value (which is the event object) out of unknown key, looks like: "0 : { event object}
+  currentEvent = Object.values(currentEvent)[0]
+  const updateEventHtml = updateEventTemplate({ event: currentEvent })
+  $(`section[data-id*=${id}]`).html(updateEventHtml)
+}
+
 module.exports = {
   onGetEventsFailure,
   onGetEventsSuccess,
   onAddEventFailure,
   onAddEventSuccess,
   onDeleteEventFailure,
-  onDeleteEventSuccess
+  onDeleteEventSuccess,
+  onClickUpdateBtn
 }

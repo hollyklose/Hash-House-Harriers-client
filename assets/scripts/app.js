@@ -2,6 +2,7 @@
 
 const authEvents = require('./auth/events')
 const eventEvents = require('./events/events')
+const uiEvents = require('./events/ui')
 
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')
@@ -20,4 +21,5 @@ $(() => {
   $('#get-events').on('click', eventEvents.onGetEvents)
   $('#add-event').on('submit', eventEvents.onAddEvent)
   $('.content').on('click', '.delete-event', eventEvents.onDeleteEvent)
+  $('.content').on('click', '.update-event', uiEvents.onClickUpdateBtn)
 })
