@@ -22,6 +22,7 @@ const onAddEvent = () => {
   const form = event.target
   const formData = getFormFields(form)
   formData.event.user_id = store.user.id
+  console.log('userid', formData.event.user_id)
   api.addEvent(formData)
     .then(ui.onAddEventSuccess)
     .catch(ui.onAddEventFailure)
@@ -34,16 +35,22 @@ const onDeleteEvent = () => {
     .catch(ui.onDeleteEventFailure)
 }
 
-// const onUpdateEvent = () => {
-//   const id = $(event.target).data('id')
-//   api.updateEvent(id)
-//     .then(() => console.log('success'))
-//     .catch(ui.onUpdateEventFailure)
-// }
+const onPatchEvent = () => {
+  event.preventDefault()
+  const form = event.target
+  const formData = getFormFields(form)
+  const id = store.updateId
+  formData.event.id = id
+  formData.event.user_id = store.user.id
+  api.patchEvent(formData)
+    .then(onGetEvents)
+    .then(ui.onPatchEventSuccess)
+    .catch(ui.onPatchEventFailure)
+}
 
 module.exports = {
   onGetEvents,
   onAddEvent,
   onDeleteEvent,
-  // onUpdateEvent
+  onPatchEvent
 }

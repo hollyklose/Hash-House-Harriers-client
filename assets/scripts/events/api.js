@@ -31,8 +31,20 @@ const deleteEvent = (id) => {
   })
 }
 
+const patchEvent = (formData) => {
+  return $.ajax({
+    url: config.apiUrl + '/events/' + formData.event.id,
+    method: 'PATCH',
+    data: formData,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   getEvents,
   addEvent,
-  deleteEvent
+  deleteEvent,
+  patchEvent
 }

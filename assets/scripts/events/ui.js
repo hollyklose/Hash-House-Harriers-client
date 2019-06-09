@@ -20,6 +20,11 @@ const onDeleteEventFailure = () => {
   setTimeout(() => $('#body-message').text(''), 5000)
 }
 
+const onPatchEventFailure = () => {
+  $('#update-message').text('There was a problem editing your event. Please try again!')
+  setTimeout(() => $('#update-message').text(''), 5000)
+}
+
 const onGetEventsSuccess = (responseData) => {
   if (responseData.events.length !== 0) {
     const showEventsHtml = showEventsTemplate({ events: responseData.events })
@@ -37,6 +42,7 @@ const onAddEventSuccess = (responseData) => {
   $('form').trigger('reset')
   const newEventHtml = newEventTemplate({ event: responseData.event })
   $('.content').append(newEventHtml)
+  store.eventsArray.push(responseData.event)
 }
 
 const onDeleteEventSuccess = (id) => {
@@ -45,12 +51,20 @@ const onDeleteEventSuccess = (id) => {
 
 const onClickUpdateBtn = () => {
   const id = $(event.target).data('id')
+  store.updateId = id
   // Get event object based on id (actually a key value pair where the event object is the value)
   let currentEvent = store.eventsArray.filter(function (item) { return item.id === id })
   // Get value (which is the event object) out of unknown key, looks like: "0 : { event object}
   currentEvent = Object.values(currentEvent)[0]
   const updateEventHtml = updateEventTemplate({ event: currentEvent })
   $(`section[data-id*=${id}]`).html(updateEventHtml)
+}
+
+const onPatchEventSuccess = (responseData) => {
+  $('#message').text('Event changed successfully')
+  setTimeout(() => $('#message').text(''), 5000)
+  $('.patch-event').hide()
+  $('html, body').animate({ scrollTop: 0 }, 'fast')
 }
 
 module.exports = {
@@ -60,5 +74,7 @@ module.exports = {
   onAddEventSuccess,
   onDeleteEventFailure,
   onDeleteEventSuccess,
-  onClickUpdateBtn
+  onClickUpdateBtn,
+  onPatchEventFailure,
+  onPatchEventSuccess
 }
