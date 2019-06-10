@@ -6,7 +6,10 @@ const store = require('../store')
 const getEvents = () => {
   return $.ajax({
     url: config.apiUrl + '/events',
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
   })
 }
 

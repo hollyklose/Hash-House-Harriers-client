@@ -10,7 +10,7 @@ const uiEvents = require('./events/ui')
 // use require without a reference to ensure a file is bundled
 // require('./example')
 
-// TO DO: order events by date field not create date, make description field larger
+// TO DO: DATE AND TIME FORMATS!, make description field larger
 
 $(() => {
   document.addEventListener('window.onload', $('#change-pw').hide())

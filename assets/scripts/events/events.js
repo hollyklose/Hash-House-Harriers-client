@@ -5,6 +5,15 @@ const api = require('./api.js')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
 
+
+
+
+// ONLY ADD DELETE AND EDIT BUTTONS IF USER IS OWNER
+
+
+
+
+
 const onGetEvents = () => {
   // if user logged in
   if (store.user) {
