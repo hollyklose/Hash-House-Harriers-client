@@ -17,20 +17,12 @@
   </p>
   <p>Bag Car:
     {{event.bag_car}}
-
-{{#each event.users as |user|}}
-  <p>
-{{user.email}}:Paid?
-{{#each ../event.attendees as |attendee|}}
-{{#equality attendee user.id }}
-    {{attendee.paid}}
-{{/equality}}
-
-{{/each}}
   </p>
-{{/each}}
+{{{twoLoops event.users event.attendees}}}
 
-<button class="rsvp">RSVP Yes!</button>
+<h2 class="rsvp-message"></h2>
+
+<button class="rsvp" data-id="{{event.id}}">RSVP Yes!</button>
 <button class="get-events">Get All Events</button>
 
 

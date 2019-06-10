@@ -64,10 +64,20 @@ const onClickViewBtn = () => {
     .catch(ui.onClickViewBtnFailure)
 }
 
+
+// ONLY IF NOT ALREAYD RSVPED
+const onRsvp = () => {
+  const eventId = $(event.target).data('id')
+  api.rsvp(eventId)
+    .then(ui.onRsvpSuccess)
+    .catch(ui.onRsvpFailure)
+}
+
 module.exports = {
   onGetEvents,
   onAddEvent,
   onDeleteEvent,
   onPatchEvent,
-  onClickViewBtn
+  onClickViewBtn,
+  onRsvp
 }

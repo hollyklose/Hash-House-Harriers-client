@@ -55,10 +55,28 @@ const patchEvent = (formData) => {
   })
 }
 
+const rsvp = (eventId) => {
+  return $.ajax({
+    url: config.apiUrl + '/attendees',
+    method: 'POST',
+    data: {
+      'attendee': {
+        'user_id': store.user.id,
+        'event_id': eventId,
+        'paid': 0
+      }
+    },
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   getEvents,
   addEvent,
   deleteEvent,
   patchEvent,
-  showEvent
+  showEvent,
+  rsvp
 }

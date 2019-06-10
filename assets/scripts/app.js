@@ -24,6 +24,7 @@ $(() => {
   $('#change-pw').on('submit', authEvents.onChangePassword)
   $('.get-events').on('click', eventEvents.onGetEvents)
   $('.content').on('click', '.get-events', eventEvents.onGetEvents)
+  $('.content').on('click', '.rsvp', eventEvents.onRsvp)
   $('#add-event').on('submit', eventEvents.onAddEvent)
   $('.content').on('click', '.delete-event', eventEvents.onDeleteEvent)
   $('.content').on('click', '.update-event', uiEvents.onClickUpdateBtn)

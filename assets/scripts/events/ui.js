@@ -31,6 +31,11 @@ const onClickViewBtnFailure = () => {
   setTimeout(() => $('#body-message').text(''), 5000)
 }
 
+const onRsvpFailure = () => {
+  $('#body-message').text('There was a problem with your RSVP. Please try again!')
+  setTimeout(() => $('#body-message').text(''), 5000)
+}
+
 const onGetEventsSuccess = (responseData) => {
   if (responseData.events.length !== 0) {
     const showEventsHtml = showEventsTemplate({ events: responseData.events })
@@ -78,6 +83,12 @@ const onClickViewBtnSuccess = (responseData) => {
   $('.content').html(viewEventHtml)
 }
 
+const onRsvpSuccess = (responseData) => {
+  const email = responseData.attendee.user.email
+  $('.rsvp-message').text(`${email} RSVPed successfully`)
+  setTimeout(() => $('.rsvp-message').text(''), 5000)
+}
+
 module.exports = {
   onGetEventsFailure,
   onGetEventsSuccess,
@@ -89,5 +100,7 @@ module.exports = {
   onPatchEventFailure,
   onPatchEventSuccess,
   onClickViewBtnFailure,
-  onClickViewBtnSuccess
+  onClickViewBtnSuccess,
+  onRsvpFailure,
+  onRsvpSuccess
 }
