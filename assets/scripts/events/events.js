@@ -5,15 +5,6 @@ const api = require('./api.js')
 const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
 
-
-
-
-// ONLY ADD DELETE AND EDIT BUTTONS IF USER IS OWNER
-
-
-
-
-
 const onGetEvents = () => {
   // if user logged in
   if (store.user) {
@@ -73,11 +64,30 @@ const onRsvp = () => {
     .catch(ui.onRsvpFailure)
 }
 
+const onUpdatePaid = () => {
+  event.preventDefault()
+  const form = event.target
+  const formData = getFormFields(form)
+  const userId = $(event.target).data('id')
+  api.getAttendees()
+    .then((responseData) => {
+      const currentAttendeeObj = responseData.attendees.filter(function (obj) { return (obj.user.id === userId && obj.event.id === store.event_id) })
+      const currentAttendee = Object.values(currentAttendeeObj)[0]
+      const currentAttendeeId = Number(currentAttendee['id'])
+      formData.attendeeId = currentAttendeeId
+      api.updatePaid(formData)
+        .then(ui.onUpdatePaidSuccess)
+        .catch(ui.onGetAttendeesFailure)
+    })
+    .catch(ui.onGetAttendeesFailure)
+}
+
 module.exports = {
   onGetEvents,
   onAddEvent,
   onDeleteEvent,
   onPatchEvent,
   onClickViewBtn,
-  onRsvp
+  onRsvp,
+  onUpdatePaid
 }

@@ -72,11 +72,39 @@ const rsvp = (eventId) => {
   })
 }
 
+const getAttendees = () => {
+  return $.ajax({
+    url: config.apiUrl + '/attendees',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const updatePaid = (formData) => {
+  return $.ajax({
+    url: config.apiUrl + '/attendees/' + formData.attendeeId,
+    method: 'PATCH',
+    data: {
+      'attendee': {
+        'paid': formData.attendee.paid
+      }
+    },
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+
 module.exports = {
   getEvents,
   addEvent,
   deleteEvent,
   patchEvent,
   showEvent,
-  rsvp
+  rsvp,
+  updatePaid,
+  getAttendees
 }

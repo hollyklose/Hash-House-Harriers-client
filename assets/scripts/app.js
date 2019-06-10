@@ -30,4 +30,5 @@ $(() => {
   $('.content').on('click', '.update-event', uiEvents.onClickUpdateBtn)
   $('.content').on('submit', '.patch-event', eventEvents.onPatchEvent)
   $('.content').on('click', '.view-event', eventEvents.onClickViewBtn)
+  $('.content').on('submit', '.update-paid', eventEvents.onUpdatePaid)
 })

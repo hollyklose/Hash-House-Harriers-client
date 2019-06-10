@@ -36,6 +36,11 @@ const onRsvpFailure = () => {
   setTimeout(() => $('#body-message').text(''), 5000)
 }
 
+const onGetAttendeesFailure = () => {
+  $('#body-message').text('There was a problem updating that this user paid. Please try again!')
+  setTimeout(() => $('#body-message').text(''), 5000)
+}
+
 const onGetEventsSuccess = (responseData) => {
   if (responseData.events.length !== 0) {
     const showEventsHtml = showEventsTemplate({ events: responseData.events })
@@ -81,12 +86,19 @@ const onPatchEventSuccess = (responseData) => {
 const onClickViewBtnSuccess = (responseData) => {
   const viewEventHtml = viewEventTemplate({ event: responseData.event })
   $('.content').html(viewEventHtml)
+  store.event_id = responseData.event.id
 }
 
 const onRsvpSuccess = (responseData) => {
   const email = responseData.attendee.user.email
   $('.rsvp-message').text(`${email} RSVPed successfully`)
   setTimeout(() => $('.rsvp-message').text(''), 5000)
+}
+
+const onUpdatePaidSuccess = (responseData) => {
+  $('.paid-update').text('Hash cash is updated for this user.')
+  setTimeout(() => $('.paid-update').text(''), 5000)
+  console.log('attendeeupdateresponse', responseData)
 }
 
 module.exports = {
@@ -102,5 +114,7 @@ module.exports = {
   onClickViewBtnFailure,
   onClickViewBtnSuccess,
   onRsvpFailure,
-  onRsvpSuccess
+  onRsvpSuccess,
+  onGetAttendeesFailure,
+  onUpdatePaidSuccess
 }
