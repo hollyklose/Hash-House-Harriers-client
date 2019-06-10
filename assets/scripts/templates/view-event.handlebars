@@ -1,0 +1,41 @@
+<section data-id="{{event.id}}">
+  <h2>{{event.name}}</h2>
+  <p>Date:
+    {{event.date}}
+  </p>
+  <p>Time:
+    {{event.time}}
+  </p>
+  <p>Location:
+    {{event.location}}
+  </p>
+  <p>Description:
+    {{event.description}}
+  </p>
+  <p>Hare:
+    {{event.hare}}
+  </p>
+  <p>Bag Car:
+    {{event.bag_car}}
+
+{{#each event.users as |user|}}
+  <p>
+{{user.email}}:Paid?
+{{#each ../event.attendees as |attendee|}}
+{{#equality attendee user.id }}
+    {{attendee.paid}}
+{{/equality}}
+
+{{/each}}
+  </p>
+{{/each}}
+
+<button class="rsvp">RSVP Yes!</button>
+<button class="get-events">Get All Events</button>
+
+
+
+
+  <button class="update-event" data-id="{{event.id}}">Edit My Event</button>
+  <button class="delete-event" data-id="{{event.id}}">Delete My Event</button>
+</section>

@@ -23,7 +23,10 @@
       {{event.editable}}
     </p>
 
+    <button class="view-event" data-id="{{event.id}}">See who's coming!</button>
+
     {{#if event.editable}}
+
     <button class="update-event" data-id="{{event.id}}">Edit My Event</button>
     <button class="delete-event" data-id="{{event.id}}">Delete My Event</button>
     {{/if}}

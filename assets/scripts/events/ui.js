@@ -4,6 +4,7 @@ const store = require('../store')
 const showEventsTemplate = require('../templates/event-listing.handlebars')
 const newEventTemplate = require('../templates/new-event.handlebars')
 const updateEventTemplate = require('../templates/update-event.handlebars')
+const viewEventTemplate = require('../templates/view-event.handlebars')
 
 const onGetEventsFailure = () => {
   $('#body-message').text('There was a problem retrieving your data. Please try again!')
@@ -23,6 +24,11 @@ const onDeleteEventFailure = () => {
 const onPatchEventFailure = () => {
   $('#update-message').text('There was a problem editing your event. Please try again!')
   setTimeout(() => $('#update-message').text(''), 5000)
+}
+
+const onClickViewBtnFailure = () => {
+  $('#body-message').text('There was a problem finding your event. Please try again!')
+  setTimeout(() => $('#body-message').text(''), 5000)
 }
 
 const onGetEventsSuccess = (responseData) => {
@@ -67,6 +73,11 @@ const onPatchEventSuccess = (responseData) => {
   $('html, body').animate({ scrollTop: 0 }, 'fast')
 }
 
+const onClickViewBtnSuccess = (responseData) => {
+  const viewEventHtml = viewEventTemplate({ event: responseData.event })
+  $('.content').html(viewEventHtml)
+}
+
 module.exports = {
   onGetEventsFailure,
   onGetEventsSuccess,
@@ -76,5 +87,7 @@ module.exports = {
   onDeleteEventSuccess,
   onClickUpdateBtn,
   onPatchEventFailure,
-  onPatchEventSuccess
+  onPatchEventSuccess,
+  onClickViewBtnFailure,
+  onClickViewBtnSuccess
 }

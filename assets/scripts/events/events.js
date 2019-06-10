@@ -57,9 +57,17 @@ const onPatchEvent = () => {
     .catch(ui.onPatchEventFailure)
 }
 
+const onClickViewBtn = () => {
+  const id = $(event.target).data('id')
+  api.showEvent(id)
+    .then(ui.onClickViewBtnSuccess)
+    .catch(ui.onClickViewBtnFailure)
+}
+
 module.exports = {
   onGetEvents,
   onAddEvent,
   onDeleteEvent,
-  onPatchEvent
+  onPatchEvent,
+  onClickViewBtn
 }

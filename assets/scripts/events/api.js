@@ -13,6 +13,16 @@ const getEvents = () => {
   })
 }
 
+const showEvent = (id) => {
+  return $.ajax({
+    url: config.apiUrl + '/events/' + id,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const addEvent = (formData) => {
   return $.ajax({
     url: config.apiUrl + '/events',
@@ -49,5 +59,6 @@ module.exports = {
   getEvents,
   addEvent,
   deleteEvent,
-  patchEvent
+  patchEvent,
+  showEvent
 }
