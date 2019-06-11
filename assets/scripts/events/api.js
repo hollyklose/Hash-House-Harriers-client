@@ -97,6 +97,16 @@ const updatePaid = (formData) => {
   })
 }
 
+const unRsvp = (currentAttendeeId) => {
+  return $.ajax({
+    url: config.apiUrl + '/attendees/' + currentAttendeeId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 
 module.exports = {
   getEvents,
@@ -106,5 +116,6 @@ module.exports = {
   showEvent,
   rsvp,
   updatePaid,
-  getAttendees
+  getAttendees,
+  unRsvp
 }

@@ -22,8 +22,8 @@ const onAddEvent = () => {
   const form = event.target
   const formData = getFormFields(form)
   formData.event.user_id = store.user.id
-  console.log('userid', formData.event.user_id)
   api.addEvent(formData)
+    .then(onGetEvents)
     .then(ui.onAddEventSuccess)
     .catch(ui.onAddEventFailure)
 }
@@ -31,7 +31,10 @@ const onAddEvent = () => {
 const onDeleteEvent = () => {
   const id = $(event.target).data('id')
   api.deleteEvent(id)
-    .then(responseData => { ui.onDeleteEventSuccess(id) })
+    .then(onGetEvents)
+    .then(responseData => {
+      ui.onDeleteEventSuccess(id)
+    })
     .catch(ui.onDeleteEventFailure)
 }
 
@@ -51,12 +54,24 @@ const onPatchEvent = () => {
 const onClickViewBtn = () => {
   const id = $(event.target).data('id')
   api.showEvent(id)
-    .then(ui.onClickViewBtnSuccess)
+    .then((responseData) => {
+      ui.onClickViewBtnSuccess(responseData)
+      store.rsvpedUsers = responseData.event.users
+      const rsvpedUsers = Object.values(store.rsvpedUsers)
+      let isAlreadyRsvped = false
+      Object.values(rsvpedUsers).forEach(value => {
+        if (value['id'] === store.user.id) {
+          isAlreadyRsvped = true
+        }
+      })
+      if (isAlreadyRsvped) {
+        $('.rsvp').hide()
+        $('.un-rsvp').show()
+      }
+    })
     .catch(ui.onClickViewBtnFailure)
 }
 
-
-// ONLY IF NOT ALREAYD RSVPED
 const onRsvp = () => {
   const eventId = $(event.target).data('id')
   api.rsvp(eventId)
@@ -71,7 +86,9 @@ const onUpdatePaid = () => {
   const userId = $(event.target).data('id')
   api.getAttendees()
     .then((responseData) => {
-      const currentAttendeeObj = responseData.attendees.filter(function (obj) { return (obj.user.id === userId && obj.event.id === store.event_id) })
+      const currentAttendeeObj = responseData.attendees.filter(function (obj) {
+        return (obj.user.id === userId && obj.event.id === store.event_id)
+      })
       const currentAttendee = Object.values(currentAttendeeObj)[0]
       const currentAttendeeId = Number(currentAttendee['id'])
       formData.attendeeId = currentAttendeeId
@@ -82,6 +99,28 @@ const onUpdatePaid = () => {
     .catch(ui.onGetAttendeesFailure)
 }
 
+// if date hasn't already passed, then user can un-rsvp
+const onUnRsvp = () => {
+  const userId = store.user.id
+  if (new Date() < new Date(($(event.target).data('date')))) {
+    api.getAttendees()
+      .then((responseData) => {
+        const currentAttendeeObj = responseData.attendees.filter(function (obj) {
+          return (obj.user.id === userId && obj.event.id === store.event_id)
+        })
+        const currentAttendee = Object.values(currentAttendeeObj)[0]
+        const currentAttendeeId = Number(currentAttendee['id'])
+        api.unRsvp(currentAttendeeId)
+          .then(ui.onUnRsvpSuccess)
+          .catch(ui.onUnRsvpFailure)
+      })
+      .catch(ui.onGetEventsFailure)
+  } else {
+    $('.rsvp-message').text('The event is already over.')
+    setTimeout(() => $('.rsvp-message').text(''), 5000)
+  }
+}
+
 module.exports = {
   onGetEvents,
   onAddEvent,
@@ -89,5 +128,6 @@ module.exports = {
   onPatchEvent,
   onClickViewBtn,
   onRsvp,
-  onUpdatePaid
+  onUpdatePaid,
+  onUnRsvp
 }

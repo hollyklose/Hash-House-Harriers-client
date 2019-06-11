@@ -2,7 +2,7 @@
 
 const store = require('../store')
 const showEventsTemplate = require('../templates/event-listing.handlebars')
-const newEventTemplate = require('../templates/new-event.handlebars')
+// const newEventTemplate = require('../templates/new-event.handlebars')
 const updateEventTemplate = require('../templates/update-event.handlebars')
 const viewEventTemplate = require('../templates/view-event.handlebars')
 
@@ -41,6 +41,16 @@ const onGetAttendeesFailure = () => {
   setTimeout(() => $('#body-message').text(''), 5000)
 }
 
+const onUnRsvpFailure = () => {
+  $('#body-message').text('There was a problem removing your RSVP. Please try again!')
+  setTimeout(() => $('#body-message').text(''), 5000)
+}
+// I THINK THIS CAN BE DELETED!
+// const ifAlreadyRsvped = () => {
+//   $('.rsvp-message').text("You've already RSVPed for this event!")
+//   setTimeout(() => $('#rsvp-message').text(''), 5000)
+// }
+
 const onGetEventsSuccess = (responseData) => {
   if (responseData.events.length !== 0) {
     const showEventsHtml = showEventsTemplate({ events: responseData.events })
@@ -56,13 +66,17 @@ const onAddEventSuccess = (responseData) => {
   $('#add-message').text('Event added successfully')
   setTimeout(() => $('#add-message').text(''), 5000)
   $('form').trigger('reset')
-  const newEventHtml = newEventTemplate({ event: responseData.event })
-  $('.content').append(newEventHtml)
-  store.eventsArray.push(responseData.event)
+  // const newEventHtml = newEventTemplate({ event: responseData.event })
+  // $('.content').append(newEventHtml)
+  // store.eventsArray.push(responseData.event)
+  // CAN I DELETE THE NEWEVENT TEMPLATE COMPLETELY? I think so...
 }
 
 const onDeleteEventSuccess = (id) => {
-  $(`section[data-id*=${id}]`).html('')
+  $('.delete-event').hide()
+  $('.update-event').hide()
+  $('#body-message').html('Click "Get events" to delete or edit another of your events.')
+  setTimeout(() => $('#body-message').text(''), 5000)
 }
 
 const onClickUpdateBtn = () => {
@@ -74,6 +88,10 @@ const onClickUpdateBtn = () => {
   currentEvent = Object.values(currentEvent)[0]
   const updateEventHtml = updateEventTemplate({ event: currentEvent })
   $(`section[data-id*=${id}]`).html(updateEventHtml)
+  $('.delete-event').hide()
+  $('.update-event').hide()
+  $('#body-message').html('Click "Get events" to delete or edit another of your events.')
+  setTimeout(() => $('#body-message').text(''), 5000)
 }
 
 const onPatchEventSuccess = (responseData) => {
@@ -93,12 +111,21 @@ const onRsvpSuccess = (responseData) => {
   const email = responseData.attendee.user.email
   $('.rsvp-message').text(`${email} RSVPed successfully`)
   setTimeout(() => $('.rsvp-message').text(''), 5000)
+  $('.rsvp').hide()
+  $('.un-rsvp').show()
 }
 
 const onUpdatePaidSuccess = (responseData) => {
   $('.paid-update').text('Hash cash is updated for this user.')
   setTimeout(() => $('.paid-update').text(''), 5000)
   console.log('attendeeupdateresponse', responseData)
+}
+
+const onUnRsvpSuccess = () => {
+  $('#body-message').text("You have successfully un-RSVPed. Hope you'll join us for the next one!")
+  setTimeout(() => $('#body-message').text(''), 5000)
+  $('.rsvp').show()
+  $('.un-rsvp').hide()
 }
 
 module.exports = {
@@ -116,5 +143,7 @@ module.exports = {
   onRsvpFailure,
   onRsvpSuccess,
   onGetAttendeesFailure,
-  onUpdatePaidSuccess
+  onUpdatePaidSuccess,
+  onUnRsvpFailure,
+  onUnRsvpSuccess
 }
