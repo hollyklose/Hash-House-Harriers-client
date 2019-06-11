@@ -13,9 +13,20 @@
     </head>
 
     <header>
-      <div class="auth">
+
+      <img src="public/boston-hash-patch.jpg" alt="Boston Hash House Harriers patch" />
       <h1>Boston Hash House Harriers Events</h1>
 
+
+
+</header>
+<div class="container-fluid">
+  <div class="row justify-content-start">
+    <div class="col-md-3">
+
+  <div class="auth">
+
+      <h2 id="message"></h2>
       <form id="sign-up">
         <p>Sign Up</p>
         <input type="email" name="credentials[email]" placeholder="Email" />
@@ -44,31 +55,41 @@
         <input type="submit" value="Change Password" />
       </form>
 
+      <a href="#add-event">Add New Event</a>
+
     </div>
 
-    <h2 id="message"></h2>
-
-    </header>
 
 
+
+  </div>
+
+    <div class="col-md-9">
     <body>
+
+
       <h2 id="body-message"></h2>
       <button class="get-events">Get Events</button>
       <div id="content" class="content"></div>
 
       <form id="add-event">
-        <p>Add New Event</p>
+        <h2>Add New Event</h2>
         <h2 id="add-message"></h2>
 
         <input type="text" name="event[name]" placeholder="Event Name" required />
         <input type="date" name="event[date]" placeholder=""2019-06-10"" required />
         <input type="time" name="event[time]" placeholder="Time" required />
         <input type="text" name="event[location]" placeholder="Location" required />
-        <input type="text" name="event[description]" placeholder="Description" required />
+        <textarea rows="4" cols="50" name="event[description]" placeholder="Description" required></textarea>
         <input type="text" name="event[hare]" placeholder="Hare" required />
         <input type="text" name="event[bag_car]" placeholder="Bag Car" required />
         <input type="submit" value="Add Event" />
       </form>
-
-    </body>
+</body>
+    </div>
+    </div>
+  </div>
+  <footer>
+    <p>Made by <a href="https://www.linkedin.com/in/hollyklose/">Holly Klose</a>! Woo hoo!</p>
+  </footer>
 </html>

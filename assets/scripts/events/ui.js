@@ -75,8 +75,9 @@ const onAddEventSuccess = (responseData) => {
 const onDeleteEventSuccess = (id) => {
   $('.delete-event').hide()
   $('.update-event').hide()
-  $('#body-message').html('Click "Get events" to delete or edit another of your events.')
+  $('#body-message').html('Your event was successfully deleted! Click "Get events" to delete or edit another of your events.')
   setTimeout(() => $('#body-message').text(''), 5000)
+  $('html, body').animate({ scrollTop: 0 }, 'fast')
 }
 
 const onClickUpdateBtn = () => {
@@ -90,13 +91,13 @@ const onClickUpdateBtn = () => {
   $(`section[data-id*=${id}]`).html(updateEventHtml)
   $('.delete-event').hide()
   $('.update-event').hide()
-  $('#body-message').html('Click "Get events" to delete or edit another of your events.')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  $('#update-message').html('Click "Get events" to delete or edit another of your events. Edit your event below:')
+  setTimeout(() => $('#update-message').text(''), 5000)
 }
 
 const onPatchEventSuccess = (responseData) => {
-  $('#message').text('Event changed successfully')
-  setTimeout(() => $('#message').text(''), 5000)
+  $('#body-message').text('Event changed successfully')
+  setTimeout(() => $('#body-message').text(''), 5000)
   $('.patch-event').hide()
   $('html, body').animate({ scrollTop: 0 }, 'fast')
 }
@@ -105,6 +106,7 @@ const onClickViewBtnSuccess = (responseData) => {
   const viewEventHtml = viewEventTemplate({ event: responseData.event })
   $('.content').html(viewEventHtml)
   store.event_id = responseData.event.id
+  $('html,body').scrollTop(0)
 }
 
 const onRsvpSuccess = (responseData) => {
@@ -122,8 +124,8 @@ const onUpdatePaidSuccess = (responseData) => {
 }
 
 const onUnRsvpSuccess = () => {
-  $('#body-message').text("You have successfully un-RSVPed. Hope you'll join us for the next one!")
-  setTimeout(() => $('#body-message').text(''), 5000)
+  $('.rsvp-message').text("You have successfully un-RSVPed. Hope you'll join us for the next one!")
+  setTimeout(() => $('.rsvp-message').text(''), 5000)
   $('.rsvp').show()
   $('.un-rsvp').hide()
 }

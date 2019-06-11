@@ -1,13 +1,114 @@
 @import '~bootstrap/scss/bootstrap';
 
+body {
+  font-family: arial, sans-serif;
+}
+
+button, input {
+  border-radius: 5px;
+  margin: .25em;
+}
+
+footer {
+  margin: 1em;
+  text-align: center;
+}
+
+h1 {
+  display: inline;
+  font-size: 2.5em;
+}
+
+section {
+  margin-bottom: 3em;
+}
+
+.auth a {
+  border: 1px solid blue;
+  border-radius: 5px;
+  display: block;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: .25em 0;
+  text-align: center;
+}
+
+header img {
+  height: 150px;
+  margin: .5em;
+  width: auto;
+}
+
+.auth {
+  color: #E4F6F8;
+  font-weight: bold;
+  margin: 0;
+}
+
+.col-md-3 {
+  background-color: #000066;
+  border-right: 2px solid #E4F6F8;
+}
+
+.col-md-9 {
+  background-color: #AA0114;
+  color: #E4F6F8;
+}
+
+.content h2 {
+  color: #71DA6F;
+}
+
+.content img {
+  float: right;
+  margin: 1em .25em 1em 1em;
+}
+
 #add-event {
   display: none;
+  margin-bottom: 2em;
+}
+
+#add-event h2 {
+  color: #71DA6F;
 }
 
 #add-event input {
   display: block;
+  margin: 1em 0;
+  width: 80%;
+}
+
+#add-event input[type=submit] {
+  background-color: #000066;
+  color: #E4F6F8;
+  font-weight: bold;
+}
+
+#add-event textarea {
+  width: 80%;
 }
 
 .un-rsvp {
   display: none;
+}
+
+@media screen and (min-width: 0) and (max-width: 400px)
+{
+  header h1 {
+    display: block;
+    text-align: center;
+  }
+
+  header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .content img {
+    display: block;
+    height: 80px;
+    width: auto;
+  }
 }
