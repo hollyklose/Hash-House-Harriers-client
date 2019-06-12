@@ -2,7 +2,6 @@
 
 const store = require('../store')
 const showEventsTemplate = require('../templates/event-listing.handlebars')
-// const newEventTemplate = require('../templates/new-event.handlebars')
 const updateEventTemplate = require('../templates/update-event.handlebars')
 const viewEventTemplate = require('../templates/view-event.handlebars')
 
@@ -63,10 +62,6 @@ const onAddEventSuccess = (responseData) => {
   $('#add-message').text('Event added successfully')
   setTimeout(() => $('#add-message').text(''), 5000)
   $('form').trigger('reset')
-  // const newEventHtml = newEventTemplate({ event: responseData.event })
-  // $('.content').append(newEventHtml)
-  // store.eventsArray.push(responseData.event)
-  // CAN I DELETE THE NEWEVENT TEMPLATE COMPLETELY? I think so...
 }
 
 const onDeleteEventSuccess = (id) => {

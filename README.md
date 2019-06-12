@@ -1,129 +1,32 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+This front end application is for users who are runners in the Boston Hash House Harriers. Each user can create an account and log in to see past and upcoming running events. They can RSVP for an event (as long as the date is not already passed), or un-RSVP if their plans change.
 
-# browser-template
+Admin users called "hash cash" can update whether or not a user has paid for a given event (and how much). They are able to do this regardless of whether an event has already passed.
 
-A template for starting front-end projects. Webpack for `require` system, build
-pipeline, and development server. Boostrap and Handlebars.js included. No
-front-end frameworks included.
+Technologies used: Javascript, HTML, CSS, JQuery, Handlebars, Bootstrap, Ajax
 
-## Installation
+Development Process:
+To start, I created a basic HTML page with the elements I wanted to manipulate and basically no formatting. After creating the signup, signin, change password and signout functionality, I went through the steps to make sure I could CRUD one single resource (events) attached to a given user. At this point, any user could see all the events, but only a given signed in user could create, edit or delete his/her own event.
 
-1. [Download](../../archive/master.zip) this template.
-    - **Do Not Fork And Clone**
-    - Click the "Clone or Download" button and select "Download Zip".
-1. Move to the `wdi/projects` directory, then unzip the template directory with
-    `unzip /Users/<user-name>/Downloads/browser-template-master.zip`.
-1. Rename the template directory from `browser-template-master` to
-    `<project-name>-client`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace all instances of `Hash-House-Harriers-client` with the name of
-    your project.
-    - You can search for all instances of text in Atom by pressing
-    `commant + shift + f` on Mac or `ctrl + shift + f` on WSL.
-1. Move into the new project and `git init`.
-1. Add all of the files in your project with the command `git add --all`.
-      - **Note: This is the only time you should run this command!**
-1. Commit all of your files with the command `git commit`.
-      - Your commit title should read `Initial commit`.
-1. Install dependencies with `npm install`.
-1. Create a new repository on [github.com](https://github.com),
-    _not GitHub Enterprise_.
-1. Name the new repository with the same name used on Step 3.
-1. Follow the instructions on your new repository's setup page. For details on
-   how to push to Github, refer to the section on Github entitled "…or push an existing
-   repository from the command line." Further documentation can be found [here](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
+Next, after updating the API on the backend, I added the ability to RSVP or un-RSVP to a given event. I made sure the RSVP could be created, read and deleted. Deleted is the equivalent of "edit" here because when a user un-RSVPs it deletes their RSVP. Once the concept of attendees was introduced I had some trouble deleting events because I wasn't properly deleting the attendees on the backend (but my frontend turned out to be okay).
 
-## Structure
+Once that was working, I added a paid column after each attendee's "yes" rsvp to show if and how much they had paid for a given event. I gave certain users the admin privilege (as "Hash Cash") to udpate this column, but other users (including the logged in non-admin user) could not update this.
 
-### Scripts
+Finally, I went back and added CSS and images to make everything look better. I also made some last minute tweaks for usability. For instance, I made sure user changes were immediately visible to the user, in addition to user response messages.
 
-Developers should store JavaScript files in [`assets/scripts`](assets/scripts).
-The "manifest" or entry-point is
-[`assets/scripts/app.js`](assets/scripts/app.js). In general, only
-application initialization goes in this file. It's normal for developers to
-start putting all code in this file, but encourage them to break out different
-responsibilities and use the `require` syntax put references where they're
-needed.
+Unsolved Problems:
+There are a number of improvements I'd like to make in the future. I want to be able to sort by past versus current events, show only current events and be able to search through the text of events (or by other criteria). I want an individual user to be able to see how many events they have attended. I would like to allow an admin to see how many events all users have attended, as well as search to find out who has not paid the full amount for past or future events.
 
-### Config
+GitHub repository for the API used in this application: https://github.com/hollyklose/Hash-House-Harriers-Rails-Api
 
-Developers should set `apiUrls.production` and `apiUrls.development` in
-[`assets/scripts/config.js`](assets/scripts/config.js).  With
-`apiUrls` set, developers may rely on `apiUrl` as the base for API
-URLs.
+Deployed API: https://sleepy-atoll-90720.herokuapp.com/
+Deployed Client side: https://hollyklose.github.io/Hash-House-Harriers-client/
 
-### Styles
+Wireframe: https://i.imgur.com/fI1FWvR.jpg
 
-Developers should store styles in [`assets/styles`](assets/styles) and load them
-from [`assets/styles/index.scss`](assets/styles/index.scss). Bootstrap version 3 is
-included in this template.
-
-### Forms and Using `getFormFields`
-
-Developers should use [getFormFields](get-form-fields.md) to retrieve form data
-to send to an API.
-
-### Deployment
-
-To deploy a browser-template based SPA, run `grunt deploy`.
-
-## Adding Images
-
-To add images to your project, you must store them in the `public` directory.
-To use the image in HTML or CSS, write the path to the image like this:
-
-```html
-<img src="public/cat.jpg">
-```
-or
-```css
-#my-cool-div {
-  background-image: url('public/cat.jpg')
-}
-```
-
-Note that there's no `./` or `/` in front of `public/filename.jpg`.
-
-## Adding Fonts
-
-To add custom fonts to your app, you can either use a CDN like Google Fonts, or
-you can download the fonts and save them in the `public` directory. If you use
-the former method, follow the directions on the website providing the fonts.
-
-For local fonts, put the files in `public`, and then import and use them in a
-`.scss` file like this:
-
-```scss
-@font-face {
-  font-family: 'Nature Beauty';
-  src: url('public/Nature-Beauty.ttf') format('truetype');
-}
-
-.element-with-custom-font {
-  font-family: 'Nature Beauty';
-}
-```
-
-## Tasks
-
-Developers should run these often!
-
-- `grunt nag` or just `grunt`: runs code quality analysis tools on your code
-    and complains
-- `grunt make-standard`: reformats all your code in the JavaScript Standard Style
-- `grunt <server|serve|s>`: generates bundles, watches, and livereloads
-- `grunt build`: place bundled styles and scripts where `index.html` can find
-    them
-- `grunt deploy`: builds and deploys master branch
-
-
-## Additional Resources
-
-- [Modern Javascript Explained for Dinosaurs](https://medium.com/@peterxjang/modern-javascript-explained-for-dinosaurs-f695e9747b70)
-- [Making Sense of Front End Build Tools](https://medium.freecodecamp.org/making-sense-of-front-end-build-tools-3a1b3a87043b)
-
-## [License](LICENSE)
-
-1. All content is licensed under a CC­BY­NC­SA 4.0 license.
-1. All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+User stories:
+I want a centralized place to hear about running club events.
+I want to advertise events I'm organizing to get people to go.
+I want to see events listed in chronological order.
+As the event leader, I want to be able to change the start date and location as I figure things out, but don't want anyone else to change it.
+I want to see who else is going to an event.
+As an admin, I want to be clear to everyone who has already paid and who still needs to.

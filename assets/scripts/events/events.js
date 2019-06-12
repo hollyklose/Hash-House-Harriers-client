@@ -6,7 +6,6 @@ const store = require('../store')
 const getFormFields = require('../../../lib/get-form-fields')
 
 const onGetEvents = () => {
-  // if user logged in
   if (store.user) {
     api.getEvents()
       .then(ui.onGetEventsSuccess)
