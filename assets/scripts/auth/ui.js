@@ -28,6 +28,8 @@ const onSignInSuccess = (responseData) => {
   $('#sign-out').show()
   $('#add-event').show()
   $('#content').show()
+  $('#add-link').show()
+  $('.get-events').show()
 }
 
 const onSignInFailure = () => {

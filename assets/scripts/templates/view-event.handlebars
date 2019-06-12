@@ -2,9 +2,8 @@
   <img src="public/on-on-foot.jpg" alt="On On foot" />
   <h2>{{event.name}}</h2>
 
-  <h2 class="rsvp-message"></h2>
-  <button class="rsvp" data-id="{{event.id}}">RSVP Yes!</button>
-  <button class="un-rsvp" data-id="{{event.id}}" data-date="{{event.date}}">RSVP No :(</button>
+{{{datePassed event.date event.id}}}
+
 
   <p>Date:
     {{event.date}}
@@ -24,6 +23,10 @@
   <p>Bag Car:
     {{event.bag_car}}
   </p>
+
+  <h2>Event Attendees:</h2>
+
+  <p id="append"></p>
 
 
   <h2 class="paid-update"></h2>

@@ -31,10 +31,10 @@ const onAddEvent = () => {
 const onDeleteEvent = () => {
   const id = $(event.target).data('id')
   api.deleteEvent(id)
-    .then(onGetEvents)
     .then(responseData => {
       ui.onDeleteEventSuccess(id)
     })
+    .then(onGetEvents)
     .catch(ui.onDeleteEventFailure)
 }
 

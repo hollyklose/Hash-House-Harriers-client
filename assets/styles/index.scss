@@ -29,7 +29,7 @@ section {
   display: block;
   font-weight: bold;
   margin: 1em auto;
-  padding: .25em 0;
+  padding: .25em .5em;
   text-align: center;
 }
 
@@ -43,6 +43,7 @@ header img {
   color: #E4F6F8;
   font-weight: bold;
   margin: 0;
+  margin-bottom: 1em;
 }
 
 .col-md-3 {
@@ -62,6 +63,10 @@ header img {
 .content img {
   float: right;
   margin: 1em .25em 1em 1em;
+}
+
+.get-events {
+  display: none;
 }
 
 #add-event {

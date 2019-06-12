@@ -45,17 +45,14 @@ const onUnRsvpFailure = () => {
   $('#body-message').text('There was a problem removing your RSVP. Please try again!')
   setTimeout(() => $('#body-message').text(''), 5000)
 }
-// I THINK THIS CAN BE DELETED!
-// const ifAlreadyRsvped = () => {
-//   $('.rsvp-message').text("You've already RSVPed for this event!")
-//   setTimeout(() => $('#rsvp-message').text(''), 5000)
-// }
 
 const onGetEventsSuccess = (responseData) => {
   if (responseData.events.length !== 0) {
     const showEventsHtml = showEventsTemplate({ events: responseData.events })
     $('.content').html(showEventsHtml)
     store.eventsArray = responseData.events
+    $('#get-message').text('Join one of these awesome events!')
+    setTimeout(() => $('#get-message').text(''), 5000)
   } else {
     $('#body-message').text("There are currently no events. Why don't you add one?")
     setTimeout(() => $('#body-message').text(''), 5000)
@@ -115,12 +112,13 @@ const onRsvpSuccess = (responseData) => {
   setTimeout(() => $('.rsvp-message').text(''), 5000)
   $('.rsvp').hide()
   $('.un-rsvp').show()
+  $('#append').append(email)
 }
 
 const onUpdatePaidSuccess = (responseData) => {
   $('.paid-update').text('Hash cash is updated for this user.')
   setTimeout(() => $('.paid-update').text(''), 5000)
-  console.log('attendeeupdateresponse', responseData)
+  $(`p:contains(${responseData.attendee.user.email})`).html(`${responseData.attendee.user.email}: ${responseData.attendee.paid}`)
 }
 
 const onUnRsvpSuccess = () => {
@@ -128,6 +126,7 @@ const onUnRsvpSuccess = () => {
   setTimeout(() => $('.rsvp-message').text(''), 5000)
   $('.rsvp').show()
   $('.un-rsvp').hide()
+  $(`p:contains(${store.user.email})`).html('')
 }
 
 module.exports = {
