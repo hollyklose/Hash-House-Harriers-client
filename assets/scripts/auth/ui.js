@@ -30,6 +30,7 @@ const onSignInSuccess = (responseData) => {
   $('#content').show()
   $('#add-link').show()
   $('.get-events').show()
+  $('#starter-image').hide()
 }
 
 const onSignInFailure = () => {
@@ -48,6 +49,9 @@ const onSignOutSuccess = () => {
   $('#sign-out').hide()
   $('#add-event').hide()
   $('#content').hide()
+  $('#add-link').hide()
+  $('.get-events').hide()
+  $('#starter-image').show()
 }
 
 const onSignOutFailure = () => {

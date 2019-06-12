@@ -94,6 +94,15 @@ header img {
   width: 80%;
 }
 
+#starter-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+  object-fit: contain;
+  padding: 0;
+}
+
 .un-rsvp {
   display: none;
 }
