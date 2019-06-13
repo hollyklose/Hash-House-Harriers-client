@@ -14,7 +14,7 @@ curl "http://localhost:4741/events" \
       "description": "'"${DESCRIPTION}"'",
       "hare": "'"${HARE}"'",
       "bag_car": "'"${BAGCAR}"'",
-      "user_id": "'"${USER}"'"
+      "event_creator": "'"${CREATOR}"'"
     }
   }'
 
