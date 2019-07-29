@@ -70,7 +70,6 @@ header img {
 }
 
 #add-event {
-  display: none;
   margin-bottom: 2em;
 }
 
@@ -90,8 +89,18 @@ header img {
   font-weight: bold;
 }
 
+#add-event label {
+  display: block;
+}
+
 #add-event textarea {
   width: 80%;
+}
+
+#show-event-form {
+  background-color: #AA0114;
+  color: white;
+  display: none;
 }
 
 #starter-image {
@@ -103,9 +112,23 @@ header img {
   padding: 0;
 }
 
+.patch-event input, label {
+  display: block;
+  width: 70%;
+}
+
+.patch-event input[type=submit] {
+  background-color: #000066;
+  color: #E4F6F8;
+  font-weight: bold;
+  margin-top: 1rem;
+  width: auto;
+}
+
 .un-rsvp {
   display: none;
 }
+
 
 @media screen and (min-width: 0) and (max-width: 400px)
 {

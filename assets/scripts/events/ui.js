@@ -4,6 +4,7 @@ const store = require('../store')
 const showEventsTemplate = require('../templates/event-listing.handlebars')
 const updateEventTemplate = require('../templates/update-event.handlebars')
 const viewEventTemplate = require('../templates/view-event.handlebars')
+const addEventTemplate = require('../templates/add-event.handlebars')
 
 const onGetEventsFailure = () => {
   $('#body-message').text('There was a problem retrieving your data. Please try again!')
@@ -124,6 +125,10 @@ const onUnRsvpSuccess = () => {
   $(`p:contains(${store.user.email})`).html('')
 }
 
+const onClickAddEvent = () => {
+  $('.content').html(addEventTemplate)
+}
+
 module.exports = {
   onGetEventsFailure,
   onGetEventsSuccess,
@@ -141,5 +146,6 @@ module.exports = {
   onGetAttendeesFailure,
   onUpdatePaidSuccess,
   onUnRsvpFailure,
-  onUnRsvpSuccess
+  onUnRsvpSuccess,
+  onClickAddEvent
 }

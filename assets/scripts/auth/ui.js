@@ -26,9 +26,8 @@ const onSignInSuccess = (responseData) => {
   $('#sign-in').hide()
   $('#change-pw').show()
   $('#sign-out').show()
-  $('#add-event').show()
   $('#content').show()
-  $('#add-link').show()
+  $('#show-event-form').show()
   $('.get-events').show()
   $('#starter-image').hide()
 }
@@ -47,9 +46,9 @@ const onSignOutSuccess = () => {
   $('#sign-in').show()
   $('#change-pw').hide()
   $('#sign-out').hide()
-  $('#add-event').hide()
+  // $('#add-event').hide()
   $('#content').hide()
-  $('#add-link').hide()
+  $('#show-event-form').hide()
   $('.get-events').hide()
   $('#starter-image').show()
 }
