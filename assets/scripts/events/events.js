@@ -12,7 +12,7 @@ const onGetEvents = () => {
       .catch(ui.onGetEventsFailure)
   } else {
     $('#body-message').text('Please log in to see events!')
-    setTimeout(() => $('#body-message').text(''), 5000)
+    setTimeout(() => $('#body-message').text(''), 7000)
   }
 }
 
@@ -116,7 +116,7 @@ const onUnRsvp = () => {
       .catch(ui.onGetEventsFailure)
   } else {
     $('.rsvp-message').text('The event is already over.')
-    setTimeout(() => $('.rsvp-message').text(''), 5000)
+    setTimeout(() => $('.rsvp-message').text(''), 7000)
   }
 }
 

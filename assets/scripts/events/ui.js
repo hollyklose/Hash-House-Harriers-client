@@ -8,42 +8,42 @@ const addEventTemplate = require('../templates/add-event.handlebars')
 
 const onGetEventsFailure = () => {
   $('#body-message').text('There was a problem retrieving your data. Please try again!')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
 }
 
 const onAddEventFailure = () => {
   $('#add-message').text('There was a problem adding your event. Please try again!')
-  setTimeout(() => $('#add-message').text(''), 5000)
+  setTimeout(() => $('#add-message').text(''), 7000)
 }
 
 const onDeleteEventFailure = () => {
   $('#body-message').text('There was a problem deleting your event. Please try again!')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
 }
 
 const onPatchEventFailure = () => {
   $('#update-message').text('There was a problem editing your event. Please try again!')
-  setTimeout(() => $('#update-message').text(''), 5000)
+  setTimeout(() => $('#update-message').text(''), 7000)
 }
 
 const onClickViewBtnFailure = () => {
   $('#body-message').text('There was a problem finding your event. Please try again!')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
 }
 
 const onRsvpFailure = () => {
   $('#body-message').text('There was a problem with your RSVP. Please try again!')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
 }
 
 const onGetAttendeesFailure = () => {
   $('#body-message').text('There was a problem updating that this user paid. Please try again!')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
 }
 
 const onUnRsvpFailure = () => {
   $('#body-message').text('There was a problem removing your RSVP. Please try again!')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
 }
 
 const onGetEventsSuccess = (responseData) => {
@@ -52,16 +52,16 @@ const onGetEventsSuccess = (responseData) => {
     $('.content').html(showEventsHtml)
     store.eventsArray = responseData.events
     $('#get-message').text('Join one of these awesome events!')
-    setTimeout(() => $('#get-message').text(''), 5000)
+    setTimeout(() => $('#get-message').text(''), 7000)
   } else {
     $('#body-message').text("There are currently no events. Why don't you add one?")
-    setTimeout(() => $('#body-message').text(''), 5000)
+    setTimeout(() => $('#body-message').text(''), 7000)
   }
 }
 
 const onAddEventSuccess = (responseData) => {
   $('#add-message').text('Event added successfully')
-  setTimeout(() => $('#add-message').text(''), 5000)
+  setTimeout(() => $('#add-message').text(''), 7000)
   $('form').trigger('reset')
 }
 
@@ -69,7 +69,7 @@ const onDeleteEventSuccess = (id) => {
   $('.delete-event').hide()
   $('.update-event').hide()
   $('#body-message').html('Your event was successfully deleted! Click "Get events" to delete or edit another of your events.')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
   $('html, body').animate({ scrollTop: 0 }, 'fast')
 }
 
@@ -85,12 +85,12 @@ const onClickUpdateBtn = () => {
   $('.delete-event').hide()
   $('.update-event').hide()
   $('#update-message').html('Click "Get events" to delete or edit another of your events. Edit your event below:')
-  setTimeout(() => $('#update-message').text(''), 5000)
+  setTimeout(() => $('#update-message').text(''), 7000)
 }
 
 const onPatchEventSuccess = (responseData) => {
   $('#body-message').text('Event changed successfully')
-  setTimeout(() => $('#body-message').text(''), 5000)
+  setTimeout(() => $('#body-message').text(''), 7000)
   $('.patch-event').hide()
   $('html, body').animate({ scrollTop: 0 }, 'fast')
 }
@@ -105,7 +105,7 @@ const onClickViewBtnSuccess = (responseData) => {
 const onRsvpSuccess = (responseData) => {
   const email = responseData.attendee.user.email
   $('.rsvp-message').text(`${email} RSVPed successfully`)
-  setTimeout(() => $('.rsvp-message').text(''), 5000)
+  setTimeout(() => $('.rsvp-message').text(''), 7000)
   $('.rsvp').hide()
   $('.un-rsvp').show()
   $('#append').append(email)
@@ -113,13 +113,13 @@ const onRsvpSuccess = (responseData) => {
 
 const onUpdatePaidSuccess = (responseData) => {
   $('.paid-update').text('Hash cash is updated for this user.')
-  setTimeout(() => $('.paid-update').text(''), 5000)
+  setTimeout(() => $('.paid-update').text(''), 7000)
   $(`p:contains(${responseData.attendee.user.email})`).html(`${responseData.attendee.user.email}: ${responseData.attendee.paid}`)
 }
 
 const onUnRsvpSuccess = () => {
   $('.rsvp-message').text("You have successfully un-RSVPed. Hope you'll join us for the next one!")
-  setTimeout(() => $('.rsvp-message').text(''), 5000)
+  setTimeout(() => $('.rsvp-message').text(''), 7000)
   $('.rsvp').show()
   $('.un-rsvp').hide()
   $(`p:contains(${store.user.email})`).html('')

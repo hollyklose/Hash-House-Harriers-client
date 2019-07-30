@@ -30,4 +30,5 @@ $(() => {
   $('.content').on('click', '.view-event', eventEvents.onClickViewBtn)
   $('.content').on('submit', '.update-paid', eventEvents.onUpdatePaid)
   $('.content').on('click', '.un-rsvp', eventEvents.onUnRsvp)
+  $('.content').on('click', '.cancel', eventEvents.onGetEvents)
 })

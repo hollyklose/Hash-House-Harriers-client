@@ -130,7 +130,7 @@ header img {
 }
 
 
-@media screen and (min-width: 0) and (max-width: 400px)
+@media screen and (min-width: 0) and (max-width: 500px)
 {
   header h1 {
     display: block;
@@ -148,4 +148,10 @@ header img {
     height: 80px;
     width: auto;
   }
+
+  .patch-event input, label {
+    display: block;
+    width: 65%;
+  }
+
 }
