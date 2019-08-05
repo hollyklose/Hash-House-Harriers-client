@@ -47,8 +47,9 @@ const onUnRsvpFailure = () => {
 }
 
 const onGetEventsSuccess = (responseData) => {
-  if (responseData.events.length !== 0) {
-    const showEventsHtml = showEventsTemplate({ events: responseData.events })
+  const currentEventsOnly = responseData.events.filter(event => new Date(event.date) > new Date())
+  if (currentEventsOnly.length !== 0) {
+    const showEventsHtml = showEventsTemplate({ events: currentEventsOnly })
     $('.content').html(showEventsHtml)
     store.eventsArray = responseData.events
     $('#get-message').text('Join one of these awesome events!')
@@ -57,6 +58,24 @@ const onGetEventsSuccess = (responseData) => {
     $('#body-message').text("There are currently no events. Why don't you add one?")
     setTimeout(() => $('#body-message').text(''), 7000)
   }
+  $('#past-events').css('opacity', 1)
+  $('#current-events').css('opacity', 0.5)
+}
+
+const onGetPastEventsSuccess = (responseData) => {
+  const pastEventsOnly = responseData.events.filter(event => new Date(event.date) < new Date())
+  if (pastEventsOnly.length !== 0) {
+    const showEventsHtml = showEventsTemplate({ events: pastEventsOnly })
+    $('.content').html(showEventsHtml)
+    store.eventsArray = responseData.events
+    $('#get-message').text('These fun events already happened!')
+    setTimeout(() => $('#get-message').text(''), 7000)
+  } else {
+    $('#body-message').text("There are currently no past events. Click current events to see what's coming!")
+    setTimeout(() => $('#body-message').text(''), 7000)
+  }
+  $('#past-events').css('opacity', 0.5)
+  $('#current-events').css('opacity', 1)
 }
 
 const onAddEventSuccess = (responseData) => {
@@ -71,6 +90,7 @@ const onDeleteEventSuccess = (id) => {
   $('#body-message').html('Your event was successfully deleted! Click "Get events" to delete or edit another of your events.')
   setTimeout(() => $('#body-message').text(''), 7000)
   $('html, body').animate({ scrollTop: 0 }, 'fast')
+  $('.content').html('')
 }
 
 const onClickUpdateBtn = () => {
@@ -147,5 +167,6 @@ module.exports = {
   onUpdatePaidSuccess,
   onUnRsvpFailure,
   onUnRsvpSuccess,
-  onClickAddEvent
+  onClickAddEvent,
+  onGetPastEventsSuccess
 }

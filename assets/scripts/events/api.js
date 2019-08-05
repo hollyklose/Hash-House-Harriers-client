@@ -13,6 +13,16 @@ const getEvents = () => {
   })
 }
 
+const getPastEvents = () => {
+  return $.ajax({
+    url: config.apiUrl + '/events',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const showEvent = (id) => {
   return $.ajax({
     url: config.apiUrl + '/events/' + id,
@@ -117,5 +127,6 @@ module.exports = {
   rsvp,
   updatePaid,
   getAttendees,
-  unRsvp
+  unRsvp,
+  getPastEvents
 }

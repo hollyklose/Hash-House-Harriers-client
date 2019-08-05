@@ -16,6 +16,17 @@ const onGetEvents = () => {
   }
 }
 
+const onGetPastEvents = () => {
+  if (store.user) {
+    api.getPastEvents()
+      .then(ui.onGetPastEventsSuccess)
+      .catch(ui.onGetEventsFailure)
+  } else {
+    $('#body-message').text('Please log in to see events!')
+    setTimeout(() => $('#body-message').text(''), 7000)
+  }
+}
+
 const onAddEvent = () => {
   event.preventDefault()
   const form = event.target
@@ -128,5 +139,6 @@ module.exports = {
   onClickViewBtn,
   onRsvp,
   onUpdatePaid,
-  onUnRsvp
+  onUnRsvp,
+  onGetPastEvents
 }
